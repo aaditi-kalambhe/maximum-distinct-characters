@@ -1,0 +1,38 @@
+def distinctchar(str, n):
+    Counts = [0] * 256
+    for i in range(n):
+        Counts[ord(str[i])] += 1
+
+    maxdistinct = 0
+    for i in range(256):
+        if (Counts[i] != 0):
+            maxdistinct += 1
+
+    return maxdistinct
+
+def smallesteSubstr(str):
+
+    n = len(str)
+    distinct = distinctchar(str, n)
+    minl = n
+
+    for i in range(n):
+        for j in range(n):
+            subs = str[i:j]
+            subs_lenght = len(subs)
+            sub_distinct_char = distinctchar(subs, subs_lenght)
+
+            if (subs_lenght < minl and
+                distinct == sub_distinct_char):
+                minl = subs_lenght
+
+    return minl
+
+if __name__ == "__main__":
+
+
+    str = input()
+    if str.islower():
+
+        l = smallesteSubstr(str);
+        print(l)
